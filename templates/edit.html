@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Go Wiki</title>
+  <meta name="description" content="Go Wiki Example">
+  <meta name="author" content="biximilien">
+
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+</head>
+
+<body>
+  <h1>Editing {{.Title}}</h1>
+
+  <form action="/save/{{.Title}}" method="POST">
+    <div><textarea name="body" rows="20" cols="80">{{printf "%s" .Body}}</textarea></div>
+    <div><input type="submit" value="Save"></div>
+  </form>
+</body>
+</html>
