@@ -8,16 +8,29 @@
   <meta name="description" content="Go Wiki Example">
   <meta name="author" content="biximilien">
 
-  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+  <link rel="stylesheet" href="/css/index.css">
 
 </head>
 
 <body>
-  <h1>Editing {{.Title}}</h1>
+  {{ template "navbar" }}
 
-  <form action="/save/{{.Title}}" method="POST">
-    <div><textarea name="body" rows="20" cols="80">{{printf "%s" .Body}}</textarea></div>
-    <div><input type="submit" value="Save"></div>
-  </form>
+  <div class="container">
+    <h1 class="title">Editing {{.Title}}</h1>
+
+    <form action="/save/{{.Title}}" method="POST">
+      <div class="field">
+        <div class="control">
+          <textarea name="body" rows="20" cols="80" class="textarea">
+            {{printf "%s" .Body}}
+          </textarea>
+          </div>
+      </div>
+
+      <div class="buttons">
+        <input type="submit" value="Save" class="button is-primary">
+      </div>
+    </form>
+  </div>
 </body>
 </html>

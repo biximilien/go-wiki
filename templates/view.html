@@ -8,15 +8,21 @@
   <meta name="description" content="Go Wiki Example">
   <meta name="author" content="biximilien">
 
-  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+  <link rel="stylesheet" href="/css/index.css">
 
 </head>
 
 <body>
-  <h1>{{.Title}}</h1>
+  {{ template "navbar" }}
 
-  <p>[<a href="/edit/{{.Title}}">edit</a>]</p>
+  <div class="container">
+    <h1 class="title">{{.Title}}</h1>
 
-  <div>{{printf "%s" .Body}}</div>
+    <p>[<a href="/edit/{{.Title}}">edit</a>]</p>
+
+    <div class="content">
+      {{printf "%s" .Body}}
+    </div>
+  </div>
 </body>
 </html>

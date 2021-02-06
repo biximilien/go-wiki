@@ -16,7 +16,7 @@ type Page struct {
 	Body  []byte `json:"body"`
 }
 
-var templates = template.Must(template.ParseFiles("templates/edit.html", "templates/view.html"))
+var templates = template.Must(template.ParseFiles("templates/edit.html", "templates/view.html", "templates/navbar.html"))
 
 func (p *Page) save() error {
 	filename := p.Title + ".txt"
@@ -80,12 +80,19 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/view/FrontPage", http.StatusFound)
-	})
+	// Serve files in `public/css` directory
+	fs := http.FileServer(http.Dir("./public/css"))
+  http.Handle("/css/", http.StripPrefix("/css/", fs))
+
+	// Wiki actions
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
+
+	// redirect to home page
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/view/FrontPage", http.StatusFound)
+	})
 
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
